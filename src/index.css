@@ -1,0 +1,28 @@
+:root {
+  --primary-background: #121212;
+  --secondary-background: #262626;
+  --border-color: #8b8b8b;
+  --primary-text-color: #e8e6e3;
+  --accent-text-color: #2979FF;
+}
+
+html, body, #root {
+  margin: 0;
+  height: 100%;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--primary-text-color);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

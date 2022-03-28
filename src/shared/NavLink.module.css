@@ -1,0 +1,12 @@
+.navLink {
+    text-decoration: none;
+    color: var(--primary-text-color);
+}
+
+.navLink:hover {
+    color: var(--accent-text-color);
+}
+
+.activeNavLink {
+    color: var(--accent-text-color);
+}
