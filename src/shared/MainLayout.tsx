@@ -12,9 +12,6 @@ function MainLayout({ onFileChange, onRandomDataGenerate }: Props) {
   return (
     <div className={styles.layoutRoot}>
       <nav className={styles.nav}>
-        <NavLink className={styles.navLink} to="/tree">
-          Tree
-        </NavLink>
         <NavLink className={styles.navLink} to="/icicle">
           Icicle
         </NavLink>

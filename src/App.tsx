@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Tree from "./tree/Tree";
 import Icicle from "./icicle/Icicle";
 import Sunburst from "./sunburst/Sunburst";
 import Treemap from "./treemap/Treemap";
@@ -11,7 +10,6 @@ import {
   generateChartDataFromFile,
 } from "./shared/dataset";
 import { useState, useCallback } from "react";
-import styles from "./App.module.css";
 
 function App() {
   const [chartData, setChartData] = useState(generateRandomChartData());
@@ -32,7 +30,6 @@ function App() {
             />
           }
         >
-          <Route path="tree" element={<Tree />}></Route>
           <Route
             path="icicle"
             element={<Icicle chartData={chartData} />}
