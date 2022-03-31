@@ -1,36 +1,59 @@
-import { Outlet } from "react-router-dom";
-import NavLink from "./shared/NavLink";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Tree from "./tree/Tree";
+import Icicle from "./icicle/Icicle";
+import Sunburst from "./sunburst/Sunburst";
+import Treemap from "./treemap/Treemap";
+import CircularTreemap from "./circular-treemap/CircularTreemap";
+import About from "./about/About";
+import MainLayout from "./shared/MainLayout";
+import {
+  generateRandomChartData,
+  generateChartDataFromFile,
+} from "./shared/dataset";
+import { useState, useCallback } from "react";
 import styles from "./App.module.css";
-import { useState } from "react";
-import CSVFileInput from "./shared/CSVFileInput";
 
 function App() {
-  const [file, setFile] = useState<File>();
+  const [chartData, setChartData] = useState(generateRandomChartData());
+
+  const generateRandomData = useCallback(() => {
+    setChartData(generateRandomChartData());
+  }, []);
 
   return (
-    <div className={styles.layoutRoot}>
-      <nav className={styles.nav}>
-        <NavLink className={styles.navLink} to="/tree">
-          Tree
-        </NavLink>
-        <NavLink className={styles.navLink} to="/icicle">
-          Icicle
-        </NavLink>
-        <NavLink className={styles.navLink} to="/sunburst">
-          Sunburst
-        </NavLink>
-        <NavLink className={styles.navLink} to="/treemap">
-          Treemap
-        </NavLink>
-        <NavLink className={styles.navLink} to="/circular-treemap">
-          Circular treemap
-        </NavLink>
-        <CSVFileInput className={styles.fileInput} onChange={setFile}>
-          Load CSV file
-        </CSVFileInput>
-      </nav>
-      <Outlet />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <MainLayout
+              onRandomDataGenerate={generateRandomData}
+              onFileChange={generateChartDataFromFile}
+            />
+          }
+        >
+          <Route path="tree" element={<Tree />}></Route>
+          <Route
+            path="icicle"
+            element={<Icicle chartData={chartData} />}
+          ></Route>
+          <Route
+            path="sunburst"
+            element={<Sunburst chartData={chartData} />}
+          ></Route>
+          <Route
+            path="treemap"
+            element={<Treemap chartData={chartData} />}
+          ></Route>
+          <Route
+            path="circular-treemap"
+            element={<CircularTreemap chartData={chartData} />}
+          ></Route>
+          <Route index element={<About />}></Route>
+          <Route path="*" element={<About />}></Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

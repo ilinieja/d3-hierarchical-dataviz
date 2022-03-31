@@ -1,5 +1,5 @@
 import { PropsWithChildren, ChangeEvent } from "react";
-import styles from "./CSVFileInput.module.css";
+import styles from "./FileInput.module.css";
 import classnames from "classnames";
 
 export interface Props {
@@ -7,7 +7,7 @@ export interface Props {
   className?: string;
 }
 
-function CSVFileInput({
+function FileInput({
   children,
   className,
   onChange,
@@ -26,4 +26,4 @@ function CSVFileInput({
   );
 }
 
-export default CSVFileInput;
+export default FileInput;

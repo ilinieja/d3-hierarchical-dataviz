@@ -4,6 +4,7 @@
   --border-color: #8b8b8b;
   --primary-text-color: #e8e6e3;
   --accent-text-color: #2979FF;
+  --header-height: 64px;
 }
 
 html, body, #root {
