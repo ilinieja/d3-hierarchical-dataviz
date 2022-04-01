@@ -1,11 +1,12 @@
 import { Outlet } from "react-router-dom";
 import NavLink from "./NavLink";
 import styles from "./MainLayout.module.css";
-import FileInput from "./FileInput";
+import FileInput, { Props as FileInputProps } from "./FileInput";
+import { MouseEventHandler } from "react";
 
 export interface Props {
-  onFileChange: (file: File) => void;
-  onRandomDataGenerate: () => void;
+  onFileChange: FileInputProps["onChange"];
+  onRandomDataGenerate: MouseEventHandler<HTMLButtonElement>;
 }
 
 function MainLayout({ onFileChange, onRandomDataGenerate }: Props) {

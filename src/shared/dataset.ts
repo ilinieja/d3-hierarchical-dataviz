@@ -36,4 +36,14 @@ export function generateRandomChartData(name = "root", level = 0): ChartData {
   };
 }
 
-export function generateChartDataFromFile() {}
+export function isChartData(data: any): data is ChartData {
+  return (
+    data &&
+    typeof data === "object" &&
+    typeof data.name === "string" &&
+    typeof data.value === "number" &&
+    typeof data.color === "string" &&
+    (!data.children ||
+      (Array.isArray(data.children) && data.children.every(isChartData)))
+  );
+}

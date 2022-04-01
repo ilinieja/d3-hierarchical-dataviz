@@ -1,10 +1,53 @@
-import { PropsWithChildren, ChangeEvent } from "react";
+import {
+  PropsWithChildren,
+  ChangeEvent,
+  useCallback,
+  useState,
+  useEffect,
+  useRef,
+} from "react";
 import styles from "./FileInput.module.css";
 import classnames from "classnames";
+import { ChartData, isChartData } from "./dataset";
+import ReactTooltip from "react-tooltip";
+
+const ERROR_MESSAGES = {
+  INVALID_JSON: "Can't parse the file, invalid JSON",
+  INVALID_DATA: "Dataset inside file is invalid",
+  INVALID_FILE_TYPE: "File should be .json",
+  CANT_LOAD: "Can't load the file",
+  UNKNOWN: "Something went wrong",
+};
 
 export interface Props {
-  onChange: (event: File) => void;
+  onChange: (dataset: ChartData) => void;
   className?: string;
+}
+
+function readFileAsync(file: File): Promise<ChartData> {
+  return new Promise((resolve, reject) => {
+    let reader = new FileReader();
+
+    reader.onload = (event) => {
+      let dataset;
+
+      try {
+        dataset = JSON.parse(event?.target?.result as string);
+      } catch (error) {
+        reject(new Error(ERROR_MESSAGES.INVALID_JSON));
+      }
+
+      if (!isChartData(dataset)) {
+        reject(new Error(ERROR_MESSAGES.INVALID_DATA));
+      }
+
+      resolve(dataset);
+    };
+
+    reader.onerror = () => reject(new Error(ERROR_MESSAGES.CANT_LOAD));
+
+    reader.readAsText(file);
+  });
 }
 
 function FileInput({
@@ -12,16 +55,63 @@ function FileInput({
   className,
   onChange,
 }: PropsWithChildren<Props>) {
-  function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
-    // TODO: Validate file content.
-    if (event?.target?.files && event.target.files[0]) {
-      onChange(event.target.files[0]);
+  const labelRef = useRef<HTMLLabelElement>(null);
+  const [validationError, setValidationError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!validationError) {
+      return;
     }
-  }
+
+    labelRef.current && ReactTooltip.show(labelRef.current);
+    const timer = setTimeout(() => {
+      labelRef.current && ReactTooltip.hide(labelRef.current);
+      setValidationError(null);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, [validationError]);
+
+  const handleFileChange = useCallback(
+    async (event: ChangeEvent<HTMLInputElement>) => {
+      try {
+        const file = event?.target?.files && event?.target?.files[0];
+
+        if (!file || file.type !== "application/json") {
+          throw new Error(ERROR_MESSAGES.INVALID_FILE_TYPE);
+        }
+
+        const dataset = await readFileAsync(file);
+        setValidationError(null);
+        onChange(dataset);
+      } catch (error) {
+        let message = ERROR_MESSAGES.UNKNOWN;
+        if (error instanceof Error) {
+          message = error.message;
+        }
+        setValidationError(message);
+      } finally {
+        event.target.value = "";
+      }
+    },
+    []
+  );
+
   return (
-    <label className={classnames([className, styles.label])}>
+    <label
+      ref={labelRef}
+      className={classnames([className, styles.label])}
+      data-tip={validationError}
+    >
       <input type="file" className={styles.input} onChange={handleFileChange} />
       {children}
+      <ReactTooltip
+        place="bottom"
+        type="error"
+        effect="solid"
+        textColor="#FFF"
+        backgroundColor="#B81327"
+      />
     </label>
   );
 }

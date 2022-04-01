@@ -5,10 +5,7 @@ import Treemap from "./treemap/Treemap";
 import CircularTreemap from "./circular-treemap/CircularTreemap";
 import About from "./about/About";
 import MainLayout from "./shared/MainLayout";
-import {
-  generateRandomChartData,
-  generateChartDataFromFile,
-} from "./shared/dataset";
+import { generateRandomChartData } from "./shared/dataset";
 import { useState, useCallback } from "react";
 
 function App() {
@@ -26,7 +23,7 @@ function App() {
           element={
             <MainLayout
               onRandomDataGenerate={generateRandomData}
-              onFileChange={generateChartDataFromFile}
+              onFileChange={setChartData}
             />
           }
         >
