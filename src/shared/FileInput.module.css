@@ -3,14 +3,14 @@
 }
 
 .label {
-    color: var(--primary-text-color);
+    color: var(--primary-light);
     border-radius: 4px;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--secondary-light);
     padding: 8px 12px;
     cursor: pointer;
 }
 
 .label:hover {
-    color: var(--accent-text-color);
-    border-color: var(--accent-text-color);
+    color: var(--accent-color);
+    border-color: var(--accent-color);
 }

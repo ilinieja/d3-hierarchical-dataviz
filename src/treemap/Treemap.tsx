@@ -1,9 +1,9 @@
 import TreemapChart from "treemap-chart";
-import { ChartData } from "../shared/dataset";
+import { ChartDataEntry } from "../shared/dataset";
 import styles from "./Treemap.module.css";
 import { useChart } from "../shared/chart";
 export interface Props {
-  chartData: ChartData;
+  chartData: ChartDataEntry;
 }
 
 function Treemap({ chartData }: Props) {

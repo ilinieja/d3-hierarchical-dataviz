@@ -8,7 +8,12 @@ import {
 } from "react";
 import styles from "./FileInput.module.css";
 import classnames from "classnames";
-import { ChartData, isChartData } from "./dataset";
+import {
+  ChartData,
+  isChartDataEntry,
+  ChartDataEntry,
+  countChartDataEntries,
+} from "./dataset";
 import ReactTooltip from "react-tooltip";
 
 const ERROR_MESSAGES = {
@@ -24,7 +29,7 @@ export interface Props {
   className?: string;
 }
 
-function readFileAsync(file: File): Promise<ChartData> {
+function readFileAsync(file: File): Promise<ChartDataEntry> {
   return new Promise((resolve, reject) => {
     let reader = new FileReader();
 
@@ -37,7 +42,7 @@ function readFileAsync(file: File): Promise<ChartData> {
         reject(new Error(ERROR_MESSAGES.INVALID_JSON));
       }
 
-      if (!isChartData(dataset)) {
+      if (!isChartDataEntry(dataset)) {
         reject(new Error(ERROR_MESSAGES.INVALID_DATA));
       }
 
@@ -81,9 +86,10 @@ function FileInput({
           throw new Error(ERROR_MESSAGES.INVALID_FILE_TYPE);
         }
 
-        const dataset = await readFileAsync(file);
+        const data = await readFileAsync(file);
+        const nodesCount = countChartDataEntries(data);
         setValidationError(null);
-        onChange(dataset);
+        onChange({ data, nodesCount });
       } catch (error) {
         let message = ERROR_MESSAGES.UNKNOWN;
         if (error instanceof Error) {

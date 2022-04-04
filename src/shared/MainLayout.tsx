@@ -2,14 +2,17 @@ import { Outlet } from "react-router-dom";
 import NavLink from "./NavLink";
 import styles from "./MainLayout.module.css";
 import FileInput, { Props as FileInputProps } from "./FileInput";
-import { MouseEventHandler } from "react";
+import RandomDataGenerator, {
+  Props as RandomDataGeneratorProps,
+} from "./RandomDataGenerator";
 
 export interface Props {
   onFileChange: FileInputProps["onChange"];
-  onRandomDataGenerate: MouseEventHandler<HTMLButtonElement>;
+  onRandomDataGenerate: RandomDataGeneratorProps["onGenerate"];
+  nodesCount: RandomDataGeneratorProps["nodesCount"];
 }
 
-function MainLayout({ onFileChange, onRandomDataGenerate }: Props) {
+function MainLayout({ onFileChange, onRandomDataGenerate, nodesCount }: Props) {
   return (
     <div className={styles.layoutRoot}>
       <nav className={styles.nav}>
@@ -26,9 +29,13 @@ function MainLayout({ onFileChange, onRandomDataGenerate }: Props) {
           Circular treemap
         </NavLink>
         <div className={styles.rightSection}>
-          <button className={styles.button} onClick={onRandomDataGenerate}>
+          <RandomDataGenerator
+            className={styles.randomDataGenerator}
+            onGenerate={onRandomDataGenerate}
+            nodesCount={nodesCount}
+          >
             Generate random dataset
-          </button>
+          </RandomDataGenerator>
           <FileInput className={styles.fileInput} onChange={onFileChange}>
             Load custom dataset
           </FileInput>

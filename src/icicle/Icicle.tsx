@@ -1,9 +1,9 @@
 import IcicleChart from "icicle-chart";
-import { ChartData } from "../shared/dataset";
+import { ChartDataEntry } from "../shared/dataset";
 import styles from "./Icicle.module.css";
 import { useChart } from "../shared/chart";
 export interface Props {
-  chartData: ChartData;
+  chartData: ChartDataEntry;
 }
 
 function Icicle({ chartData }: Props) {

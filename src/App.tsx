@@ -5,15 +5,21 @@ import Treemap from "./treemap/Treemap";
 import CircularTreemap from "./circular-treemap/CircularTreemap";
 import About from "./about/About";
 import MainLayout from "./shared/MainLayout";
-import { generateRandomChartData } from "./shared/dataset";
+import {
+  generateRandomChartData,
+  RandomDataGenerationParams,
+} from "./shared/dataset";
 import { useState, useCallback } from "react";
 
 function App() {
   const [chartData, setChartData] = useState(generateRandomChartData());
 
-  const generateRandomData = useCallback(() => {
-    setChartData(generateRandomChartData());
-  }, []);
+  const generateRandomData = useCallback(
+    (params: RandomDataGenerationParams) => {
+      setChartData(generateRandomChartData(params));
+    },
+    []
+  );
 
   return (
     <BrowserRouter>
@@ -23,25 +29,26 @@ function App() {
           element={
             <MainLayout
               onRandomDataGenerate={generateRandomData}
+              nodesCount={chartData.nodesCount}
               onFileChange={setChartData}
             />
           }
         >
           <Route
             path="icicle"
-            element={<Icicle chartData={chartData} />}
+            element={<Icicle chartData={chartData.data} />}
           ></Route>
           <Route
             path="sunburst"
-            element={<Sunburst chartData={chartData} />}
+            element={<Sunburst chartData={chartData.data} />}
           ></Route>
           <Route
             path="treemap"
-            element={<Treemap chartData={chartData} />}
+            element={<Treemap chartData={chartData.data} />}
           ></Route>
           <Route
             path="circular-treemap"
-            element={<CircularTreemap chartData={chartData} />}
+            element={<CircularTreemap chartData={chartData.data} />}
           ></Route>
           <Route index element={<About />}></Route>
           <Route path="*" element={<About />}></Route>

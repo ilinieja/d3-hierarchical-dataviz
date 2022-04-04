@@ -3,13 +3,13 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background: var(--primary-background);
+    background: var(--primary-dark);
 }
 
 .nav {
     width: 100%;
     height: var(--header-height);
-    background: var(--secondary-background);
+    background: var(--secondary-dark);
     display: flex;
     align-items: center;
     overflow-x: auto;
@@ -34,19 +34,6 @@
     white-space: nowrap;
 }
 
-.button {
+.randomDataGenerator {
     margin-right: 10px;
-    color: var(--primary-text-color);
-    border-radius: 4px;
-    border: 1px solid var(--border-color);
-    padding: 8px 12px;
-    cursor: pointer;
-    background: none;
-    font: inherit;
-    white-space: nowrap;
-}
-
-.button:hover {
-    color: var(--accent-text-color);
-    border-color: var(--accent-text-color);
 }

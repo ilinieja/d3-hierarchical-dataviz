@@ -1,8 +1,11 @@
 import { useCallback, useRef, useEffect, useState } from "react";
 import useResizeObserver from "@react-hook/resize-observer";
-import { ChartData } from "../shared/dataset";
+import { ChartDataEntry } from "../shared/dataset";
 
-export function useChart(chartData: ChartData, chartConstructor: Function) {
+export function useChart(
+  chartData: ChartDataEntry,
+  chartConstructor: Function
+) {
   const chartRef = useRef(chartConstructor());
   const [chartContainerElement, setChartContainerElement] =
     useState<HTMLElement | null>(null);
