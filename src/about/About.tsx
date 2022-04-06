@@ -20,7 +20,9 @@ function About() {
         format. Every node in it should have <code>name</code>,{" "}
         <code>value</code> and <code>color</code> fields. <code>children</code>{" "}
         array is for nodes under the current one.{" "}
-        <a href="/example-dataset.json">Example dataset</a>.
+        <a href="/example-dataset.json" target="_blank">
+          Example dataset
+        </a>
       </p>
     </div>
   );
