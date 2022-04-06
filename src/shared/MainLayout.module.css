@@ -19,13 +19,13 @@
 
 .navLink {
     padding: 6px 10px;
-    margin-right: 12px;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
 }
 
 .rightSection {
     margin-left: auto;
-    margin-right: 10px;
     display: flex;
     flex-wrap: nowrap;
 }
@@ -36,4 +36,14 @@
 
 .randomDataGenerator {
     margin-right: 10px;
+}
+
+.questionIcon {
+    width: 24px;
+    height: 24px;
+    fill: var(--primary-light);
+}
+
+.navLink:not(:last-child) {
+    margin-right: 12px;
 }

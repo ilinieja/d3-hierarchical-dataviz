@@ -10,3 +10,11 @@
 .activeNavLink {
     color: var(--accent-color);
 }
+
+.navLink:hover>svg {
+    fill: var(--accent-color);
+}
+
+.activeNavLink>svg {
+    fill: var(--accent-color);
+}

@@ -5,7 +5,7 @@ import FileInput, { Props as FileInputProps } from "./FileInput";
 import RandomDataGenerator, {
   Props as RandomDataGeneratorProps,
 } from "./RandomDataGenerator";
-
+import { QuestionIcon } from "./icons";
 export interface Props {
   onFileChange: FileInputProps["onChange"];
   onRandomDataGenerate: RandomDataGeneratorProps["onGenerate"];
@@ -39,6 +39,9 @@ function MainLayout({ onFileChange, onRandomDataGenerate, nodesCount }: Props) {
           <FileInput className={styles.fileInput} onChange={onFileChange}>
             Load custom dataset
           </FileInput>
+          <NavLink className={styles.navLink} to="/about">
+            <QuestionIcon className={styles.questionIcon}></QuestionIcon>
+          </NavLink>
         </div>
       </nav>
       <Outlet />
