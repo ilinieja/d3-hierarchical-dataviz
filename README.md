@@ -6,9 +6,9 @@ The app to quickly evaluate different hierarchical data visualization options.
 ## Demo
 Available online [here](https://poc-hierarchical-dataviz.vercel.app/)
 
-![Demo](https://ibb.co/sg9mSWv)
-![Demo](https://ibb.co/ZYhmy59)
-![Demo](https://ibb.co/wz6Y7n2)
+![Demo](https://i.ibb.co/BCswGhY/screencapture-poc-hierarchical-dataviz-vercel-app-icicle-2022-04-16-14-05-33.png)
+![Demo](https://i.ibb.co/nnDCh9p/screencapture-poc-hierarchical-dataviz-vercel-app-sunburst-2022-04-16-14-06-12.png)
+![Demo](https://i.ibb.co/6y0nhXR/screencapture-poc-hierarchical-dataviz-vercel-app-treemap-2022-04-16-14-06-26.png)
 
 
 ## Available Scripts
