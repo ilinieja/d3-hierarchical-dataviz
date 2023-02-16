@@ -1,4 +1,4 @@
-# Hierarhical dataviz POC
+# POC D3 hierarhical dataviz
 
 React + D3 app for quick evaluation of different hierarchical data visualization options.
 
