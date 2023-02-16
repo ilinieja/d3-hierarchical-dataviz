@@ -1,6 +1,6 @@
 # Hierarhical dataviz POC
 
-The app to quickly evaluate different hierarchical data visualization options.
+React + D3 app for quick evaluation of different hierarchical data visualization options.
 
 
 ## Demo
